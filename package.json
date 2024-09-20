@@ -3,19 +3,44 @@
   "displayName": "Selectio",
   "description": "Rapidly select text between your cursor and the next character",
   "version": "0.0.1",
+  "publisher": "your-publisher-name",
   "engines": {
     "vscode": "^1.93.0"
   },
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "selectio.helloWorld",
-        "title": "Hello World"
+        "command": "extension.startSelectioTypeMode",
+        "title": "Start Selectio Type Mode"
+      },
+      {
+        "command": "extension.exitSelectioTypeMode",
+        "title": "Exit Selectio Type Mode"
+      },
+      {
+        "command": "extension.confirmSelectioTypeMode",
+        "title": "Confirm Selectio Type Mode"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "extension.startSelectioTypeMode",
+        "key": "ctrl+k ctrl+;",
+        "when": "editorTextFocus"
+      },
+      {
+        "key": "Escape",
+        "command": "extension.exitSelectioTypeMode",
+        "when": "editorTextFocus && selectio.isTypeMode"
+      },
+      {
+        "key": "Enter",
+        "command": "extension.confirmSelectioTypeMode",
+        "when": "editorTextFocus && selectio.isTypeMode"
       }
     ]
   },
