@@ -53,9 +53,9 @@ Once installed, start using **Selectio** by following these simple steps:
 
 ## 🛠️ Commands
 
-- **`extension.startSelectioTypeMode`**: Activates Selectio's live type mode.
-- **`extension.confirmSelectioTypeMode`**: Confirms the current selection and exits type mode.
-- **`extension.exitSelectioTypeMode`**: Cancels type mode and reverts to the original selection.
+- **`selectio.startSelectioTypeMode`**: Activates Selectio's live type mode.
+- **`selectio.confirmSelectioTypeMode`**: Confirms the current selection and exits type mode.
+- **`selectio.exitSelectioTypeMode`**: Cancels type mode and reverts to the original selection.
 
 ## 🧑‍💻 Contributing
 

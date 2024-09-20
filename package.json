@@ -21,9 +21,9 @@
   },
   "homepage": "https://github.com/pTinosq/selectio/blob/main/README.md",
   "activationEvents": [
-    "onCommand:extension.startSelectioTypeMode",
-    "onCommand:extension.exitSelectioTypeMode",
-    "onCommand:extension.confirmSelectioTypeMode"
+    "onCommand:selectio.startSelectioTypeMode",
+    "onCommand:selectio.exitSelectioTypeMode",
+    "onCommand:selectio.confirmSelectioTypeMode"
   ],
   "main": "./out/extension.js",
   "contributes": {
