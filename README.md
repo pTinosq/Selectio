@@ -1,71 +1,73 @@
-# selectio README
+<div align="center">
+  <img src="https://raw.githubusercontent.com/pTinosq/Selectio/refs/heads/main/design/github-banner.jpg">
+  <br>
+  <br>
+  <h1>Selectio - Smart text selection for VS Code</h1>
+</div>
 
-This is the README for your extension "selectio". After writing up a brief description, we recommend including the following sections.
+## Introduction
 
-## Features
+**Selectio** is a VSCode extension designed to enhance the text selection experience for developers. With live, character-based selection, you can now expand selections effortlessly by simply typing the characters you're looking for. No need to pick up your mouse or shift-select - **Selectio** does the work for you!
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+### ✨ Features
 
-For example if there is an image subfolder under your extension project workspace:
+- **Live Selection as You Type**: Watch the selection expand in real-time as you type the characters.
+- **Keybinding Support**: Activate Selectio with a single key combination (`Ctrl+K, CTRL+;` by default).
+- **Seamless Navigation**: Quickly jump to specific characters, fine-tuning your selection with precision.
+- **Easy Undo**: If you make a mistake, easily revert to the original selection with the `Escape` key.
+- **Effortless Integration**: Works naturally within VSCode - just activate and start selecting!
 
-\!\[feature X\]\(images/feature-x.png\)
+### 🎥 Example
+#### Select until the semicolon character (`;`):
+![Selectio example GIF](https://raw.githubusercontent.com/pTinosq/Selectio/refs/heads/main/design/gifs/selectio-example.gif)
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+## ⚡ Quick Start
 
-## Requirements
+### Installation
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+To install **Selectio**:
 
-## Extension Settings
+1. Open **VSCode**.
+2. Navigate to the Extensions panel (`Ctrl+Shift+X`).
+3. Search for "**Selectio**".
+4. Click "**Install**".
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+Alternatively, you can install it directly from the VSCode Marketplace [here](#).
 
-For example:
+### Usage
 
-This extension contributes the following settings:
+Once installed, start using **Selectio** by following these simple steps:
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+- **Activate Selectio Type Mode**:
+  - `Ctrl+K, CTRL+;` (or your configured shortcut).
+- **Type Characters**:
 
-## Known Issues
+  - Begin typing the characters you want to select until. The selection will update live as you type!
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+- **Confirm the Selection**:
 
-## Release Notes
+  - Press `Enter` to confirm your selection.
 
-Users appreciate release notes as you update your extension.
+- **Revert to Original Selection**:
+  - Press `Escape` at any time to revert to your original selection or cursor position.
 
-### 1.0.0
+## 🛠️ Commands
 
-Initial release of ...
+- **`extension.startSelectioTypeMode`**: Activates Selectio's live type mode.
+- **`extension.confirmSelectioTypeMode`**: Confirms the current selection and exits type mode.
+- **`extension.exitSelectioTypeMode`**: Cancels type mode and reverts to the original selection.
 
-### 1.0.1
+## 🧑‍💻 Contributing
 
-Fixed issue #.
+**Selectio** is always looking for contributors! To get started:
 
-### 1.1.0
+1. **Fork the repository** and clone your fork.
+2. **Install dependencies**: `npm install`.
+3. Make your changes.
+4. Submit a **pull request**!
 
-Added features X, Y, and Z.
+Make sure to follow our [contribution guidelines](#) for detailed instructions.
 
----
+## 🛡️ Support
 
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+For any questions or issues, feel free to open a GitHub Issue or [reach out to the author](https://x.com/pTinosq).
