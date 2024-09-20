@@ -2,7 +2,7 @@
   "name": "selectio",
   "displayName": "Selectio",
   "description": "Rapidly select text between your cursor and the next character",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publisher": "pTinosq",
   "author": "pTinosq",
   "engines": {
@@ -17,7 +17,7 @@
     "Other"
   ],
   "bugs": {
-      "url": "https://github.com/pTinosq/selectio/issues"
+    "url": "https://github.com/pTinosq/selectio/issues"
   },
   "homepage": "https://github.com/pTinosq/selectio/blob/main/README.md",
   "activationEvents": [
