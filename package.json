@@ -2,8 +2,8 @@
   "name": "selectio",
   "displayName": "Selectio",
   "description": "Rapidly select text between your cursor and the next character",
-  "version": "0.0.1",
-  "publisher": "your-publisher-name",
+  "version": "1.0.0",
+  "publisher": "pTinosq",
   "engines": {
     "vscode": "^1.93.0"
   },
