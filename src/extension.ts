@@ -1,9 +1,13 @@
 import * as vscode from "vscode";
 import { LinkedList } from "./LinkedList";
 
+function processLinkedKeyList(linkedList: LinkedList<string>) {
+  linkedList.print();
+}
+
 export function activate(context: vscode.ExtensionContext) {
   let isTypeMode = false;
-  let linkedList: LinkedList<string> | null = null;
+  let linkedKeyList: LinkedList<string> | null = null;
 
   function setTypeMode(value: boolean) {
     isTypeMode = value;
@@ -21,8 +25,8 @@ export function activate(context: vscode.ExtensionContext) {
       const editor = vscode.window.activeTextEditor;
       const char: string = args.text;
 
-      if (linkedList) {
-        linkedList.add(char);
+      if (linkedKeyList) {
+        linkedKeyList.add(char);
       }
     }
   );
@@ -34,7 +38,7 @@ export function activate(context: vscode.ExtensionContext) {
     () => {
       console.log("type");
       setTypeMode(true);
-      linkedList = new LinkedList<string>();
+      linkedKeyList = new LinkedList<string>();
     }
   );
 
@@ -45,7 +49,7 @@ export function activate(context: vscode.ExtensionContext) {
     () => {
       console.log("exit");
       setTypeMode(false);
-      linkedList = null;
+      linkedKeyList = null;
     }
   );
 
@@ -54,11 +58,12 @@ export function activate(context: vscode.ExtensionContext) {
   const confirmSelectioTypeModeDisposable = vscode.commands.registerCommand(
     "extension.confirmSelectioTypeMode",
     () => {
-			linkedList?.print();
+      if (linkedKeyList && !linkedKeyList.isEmpty()) {
+        processLinkedKeyList(linkedKeyList);
+      }
 
-			setTypeMode(false);
-			linkedList = null;
-
+      setTypeMode(false);
+      linkedKeyList = null;
     }
   );
 
