@@ -58,7 +58,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 	// Start selection type mode
 	const selectioTypeModeDisposable = vscode.commands.registerCommand(
-		"extension.startSelectioTypeMode",
+		"selectio.startSelectioTypeMode",
 		() => {
 			const editor = vscode.window.activeTextEditor;
 			if (editor) {
@@ -74,7 +74,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 	// Exit selection type mode
 	const exitSelectioTypeModeDisposable = vscode.commands.registerCommand(
-		"extension.exitSelectioTypeMode",
+		"selectio.exitSelectioTypeMode",
 		() => {
 			const editor = vscode.window.activeTextEditor;
 			if (editor && originalSelection) {
@@ -90,7 +90,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 	// Confirm selection type mode
 	const confirmSelectioTypeModeDisposable = vscode.commands.registerCommand(
-		"extension.confirmSelectioTypeMode",
+		"selectio.confirmSelectioTypeMode",
 		() => {
 			originalSelection = null;
 			setTypeMode(false);

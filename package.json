@@ -16,36 +16,45 @@
   "categories": [
     "Other"
   ],
+  "bugs": {
+      "url": "https://github.com/pTinosq/selectio/issues"
+  },
+  "homepage": "https://github.com/pTinosq/selectio/blob/main/README.md",
+  "activationEvents": [
+    "onCommand:extension.startSelectioTypeMode",
+    "onCommand:extension.exitSelectioTypeMode",
+    "onCommand:extension.confirmSelectioTypeMode"
+  ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "extension.startSelectioTypeMode",
+        "command": "selectio.startSelectioTypeMode",
         "title": "Start Selectio Type Mode"
       },
       {
-        "command": "extension.exitSelectioTypeMode",
+        "command": "selectio.exitSelectioTypeMode",
         "title": "Exit Selectio Type Mode"
       },
       {
-        "command": "extension.confirmSelectioTypeMode",
+        "command": "selectio.confirmSelectioTypeMode",
         "title": "Confirm Selectio Type Mode"
       }
     ],
     "keybindings": [
       {
-        "command": "extension.startSelectioTypeMode",
+        "command": "selectio.startSelectioTypeMode",
         "key": "ctrl+k ctrl+;",
         "when": "editorTextFocus"
       },
       {
         "key": "Escape",
-        "command": "extension.exitSelectioTypeMode",
+        "command": "selectio.exitSelectioTypeMode",
         "when": "editorTextFocus && selectio.isTypeMode"
       },
       {
         "key": "Enter",
-        "command": "extension.confirmSelectioTypeMode",
+        "command": "selectio.confirmSelectioTypeMode",
         "when": "editorTextFocus && selectio.isTypeMode"
       }
     ]
