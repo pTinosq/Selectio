@@ -1,47 +1,38 @@
 import * as vscode from "vscode";
-import { LinkedList } from "./LinkedList";
 
-function processLinkedKeyList(
-  linkedList: LinkedList<string>,
-  editor: vscode.TextEditor
-) {
-  const cursorStartPosition = editor.selection.start;
+let originalSelection: vscode.Selection | null = null;
+
+function processTypedCharacter(char: string, editor: vscode.TextEditor) {
+  const cursorSelectionStartPosition = editor.selection.start;
+  const cursorSelectionEndPosition = editor.selection.end;
+
   const text = editor.document.getText();
+  let currentPos = cursorSelectionEndPosition;
 
-	// slice the text after the cursor position
-  const textAfterCursor = text.slice(
-    editor.document.offsetAt(cursorStartPosition)
-  );
+  // Tracks the cumulative offset of the current position
+  let offset = editor.document.offsetAt(currentPos);
 
-  let currentNode = linkedList.getHead();
+  // Search for the most recent character
+  const textAfterOffset = text.slice(offset);
+  const indexOfChar = textAfterOffset.indexOf(char);
 
-  while (currentNode !== null) {
-    const value = currentNode.value;
+  if (indexOfChar !== -1) {
+    const newSelectionPos = editor.document.positionAt(
+      offset + indexOfChar + 1
+    );
 
-    const indexOfChar = textAfterCursor.indexOf(value);
+    // Update the selection to the new char position
+    const selection = new vscode.Selection(
+      cursorSelectionStartPosition,
+      newSelectionPos
+    );
 
-    if (indexOfChar !== -1) {
-      const nextCharPosition = editor.document.positionAt(
-        editor.document.offsetAt(cursorStartPosition) + indexOfChar
-      );
-
-      const selection = new vscode.Selection(
-        cursorStartPosition,
-        nextCharPosition
-      );
-			
-      editor.selection = selection;
-
-      break;
-    }
-
-    currentNode = linkedList.getNext(currentNode);
+    editor.selection = selection;
   }
 }
 
 export function activate(context: vscode.ExtensionContext) {
   let isTypeMode = false;
-  let linkedKeyList: LinkedList<string> | null = null;
 
   function setTypeMode(value: boolean) {
     isTypeMode = value;
@@ -51,57 +42,58 @@ export function activate(context: vscode.ExtensionContext) {
   const selectioTypeDisposable = vscode.commands.registerCommand(
     "type",
     (args) => {
-      if (!isTypeMode) {
+      const editor = vscode.window.activeTextEditor;
+
+      // Only process the typed character if type mode is enabled
+      if (!editor || !isTypeMode) {
         vscode.commands.executeCommand("default:type", args);
         return;
       }
 
-      const editor = vscode.window.activeTextEditor;
-      const char: string = args.text;
-
-      if (linkedKeyList) {
-        linkedKeyList.add(char);
-      }
+      processTypedCharacter(args.text, editor);
     }
   );
 
   context.subscriptions.push(selectioTypeDisposable);
 
+  // Start selection type mode
   const selectioTypeModeDisposable = vscode.commands.registerCommand(
     "extension.startSelectioTypeMode",
     () => {
-      console.log("type");
+      const editor = vscode.window.activeTextEditor;
+      if (editor) {
+        // Store the original selection when type mode starts
+        // We do this so that we can restore the selection if the user exits type mode
+        originalSelection = editor.selection;
+      }
       setTypeMode(true);
-      linkedKeyList = new LinkedList<string>();
     }
   );
 
   context.subscriptions.push(selectioTypeModeDisposable);
 
+  // Exit selection type mode
   const exitSelectioTypeModeDisposable = vscode.commands.registerCommand(
     "extension.exitSelectioTypeMode",
     () => {
-      console.log("exit");
+      const editor = vscode.window.activeTextEditor;
+      if (editor && originalSelection) {
+        // When the user exits type mode, restore the original selection
+        editor.selection = originalSelection;
+        originalSelection = null;
+      }
       setTypeMode(false);
-      linkedKeyList = null;
     }
   );
 
   context.subscriptions.push(exitSelectioTypeModeDisposable);
 
+  // Confirm selection type mode
   const confirmSelectioTypeModeDisposable = vscode.commands.registerCommand(
     "extension.confirmSelectioTypeMode",
     () => {
-      if (
-        linkedKeyList &&
-        !linkedKeyList.isEmpty() &&
-        vscode.window.activeTextEditor
-      ) {
-        processLinkedKeyList(linkedKeyList, vscode.window.activeTextEditor);
-      }
-
+      originalSelection = null;
       setTypeMode(false);
-      linkedKeyList = null;
     }
   );
 
