@@ -1,7 +1,9 @@
 import * as vscode from "vscode";
+import { LinkedList } from "./LinkedList";
 
 export function activate(context: vscode.ExtensionContext) {
   let isTypeMode = false;
+  let linkedList: LinkedList<string> | null = null;
 
   function setTypeMode(value: boolean) {
     isTypeMode = value;
@@ -12,24 +14,15 @@ export function activate(context: vscode.ExtensionContext) {
     "type",
     (args) => {
       if (!isTypeMode) {
-				vscode.commands.executeCommand('default:type', args);
+        vscode.commands.executeCommand("default:type", args);
         return;
       }
 
-      console.log("051772", isTypeMode);
       const editor = vscode.window.activeTextEditor;
       const char: string = args.text;
 
-      switch (char) {
-        case "\r": // "return" key (Enter)
-          console.log("return");
-          break;
-        case "\u001b": // "escape" key (Esc)
-          console.log("escape");
-          break;
-        default:
-          console.log("xxx:", char);
-          break;
+      if (linkedList) {
+        linkedList.add(char);
       }
     }
   );
@@ -39,8 +32,9 @@ export function activate(context: vscode.ExtensionContext) {
   const selectioTypeModeDisposable = vscode.commands.registerCommand(
     "extension.startSelectioTypeMode",
     () => {
-      setTypeMode(true);
       console.log("type");
+      setTypeMode(true);
+      linkedList = new LinkedList<string>();
     }
   );
 
@@ -49,8 +43,9 @@ export function activate(context: vscode.ExtensionContext) {
   const exitSelectioTypeModeDisposable = vscode.commands.registerCommand(
     "extension.exitSelectioTypeMode",
     () => {
-      setTypeMode(false);
       console.log("exit");
+      setTypeMode(false);
+      linkedList = null;
     }
   );
 
@@ -59,7 +54,11 @@ export function activate(context: vscode.ExtensionContext) {
   const confirmSelectioTypeModeDisposable = vscode.commands.registerCommand(
     "extension.confirmSelectioTypeMode",
     () => {
-      console.log("confirm");
+			linkedList?.print();
+
+			setTypeMode(false);
+			linkedList = null;
+
     }
   );
 
