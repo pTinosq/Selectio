@@ -7,6 +7,14 @@ export class LinkedList<T> {
     return this.head === null;
   }
 
+  public getHead(): Node<T> | null {
+    return this.head;
+  }
+
+  public getNext(current: Node<T> | null): Node<T> | null {
+    return current?.next ?? null;
+  }
+
   public add(value: T): void {
     const newNode = new Node(value);
     if (this.isEmpty()) {
@@ -25,7 +33,6 @@ export class LinkedList<T> {
       return false;
     }
 
-    // check if the head needs to be removed
     if (this.head?.value === value) {
       this.head = this.head.next;
       return true;

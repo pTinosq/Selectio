@@ -1,8 +1,42 @@
 import * as vscode from "vscode";
 import { LinkedList } from "./LinkedList";
 
-function processLinkedKeyList(linkedList: LinkedList<string>) {
-  linkedList.print();
+function processLinkedKeyList(
+  linkedList: LinkedList<string>,
+  editor: vscode.TextEditor
+) {
+  const cursorStartPosition = editor.selection.start;
+  const text = editor.document.getText();
+
+	// slice the text after the cursor position
+  const textAfterCursor = text.slice(
+    editor.document.offsetAt(cursorStartPosition)
+  );
+
+  let currentNode = linkedList.getHead();
+
+  while (currentNode !== null) {
+    const value = currentNode.value;
+
+    const indexOfChar = textAfterCursor.indexOf(value);
+
+    if (indexOfChar !== -1) {
+      const nextCharPosition = editor.document.positionAt(
+        editor.document.offsetAt(cursorStartPosition) + indexOfChar
+      );
+
+      const selection = new vscode.Selection(
+        cursorStartPosition,
+        nextCharPosition
+      );
+			
+      editor.selection = selection;
+
+      break;
+    }
+
+    currentNode = linkedList.getNext(currentNode);
+  }
 }
 
 export function activate(context: vscode.ExtensionContext) {
@@ -58,8 +92,12 @@ export function activate(context: vscode.ExtensionContext) {
   const confirmSelectioTypeModeDisposable = vscode.commands.registerCommand(
     "extension.confirmSelectioTypeMode",
     () => {
-      if (linkedKeyList && !linkedKeyList.isEmpty()) {
-        processLinkedKeyList(linkedKeyList);
+      if (
+        linkedKeyList &&
+        !linkedKeyList.isEmpty() &&
+        vscode.window.activeTextEditor
+      ) {
+        processLinkedKeyList(linkedKeyList, vscode.window.activeTextEditor);
       }
 
       setTypeMode(false);
