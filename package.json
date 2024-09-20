@@ -4,6 +4,7 @@
   "description": "Rapidly select text between your cursor and the next character",
   "version": "1.0.0",
   "publisher": "pTinosq",
+  "author": "pTinosq",
   "engines": {
     "vscode": "^1.93.0"
   },
