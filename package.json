@@ -2,7 +2,7 @@
   "name": "selectio",
   "displayName": "Selectio",
   "description": "Rapidly select text between your cursor and the next character",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "publisher": "pTinosq",
   "author": "pTinosq",
   "engines": {
