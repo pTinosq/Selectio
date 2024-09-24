@@ -9,6 +9,8 @@
 
 **Selectio** is a VSCode extension designed to enhance the text selection experience for developers. With live, character-based selection, you can now expand selections effortlessly by simply typing the characters you're looking for. No need to pick up your mouse or shift-select - **Selectio** does the work for you!
 
+[[Marketplace] - Add Selectio to your IDE](https://marketplace.visualstudio.com/items?itemName=pTinosq.selectio)
+
 ### ✨ Features
 
 - **Live Selection as You Type**: Watch the selection expand in real-time as you type the characters.
